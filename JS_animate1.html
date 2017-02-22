@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习js动画1</title>
+	<style>
+        #animate {
+        	width: 200px;
+        	height: 200px;
+        	background-color: red;
+            position: absolute;
+            top: 50px;
+            left: -200px;
+            
+        }
+        #animate p {
+        	font-size: 20px;
+        	color: white;
+        	text-align: center;
+        	margin-top: 84px;
+        }
+        #share {
+        	display: inline-block;
+        	width: 16px;
+        	padding: 10px;
+        	background-color: pink;
+        	position: absolute;
+        	top: 64px;
+        	right: -36px;
+        }
+	</style>
+	<script>
+        window.onload = function() {
+        	var oDiv = document.getElementById('animate');
+        	oDiv.onmouseover = function() {
+        		startMove(0);
+        	}
+        	oDiv.onmouseout = function() {
+        		startMove(-200);
+        	}	
+        }
+        var timer = null;
+        function startMove(iTarget) {
+            var setSpeed = 10;  //自定义移动速度
+        	var oDiv = document.getElementById('animate');
+        	clearInterval(timer);
+            timer = setInterval(function() {
+            	var speed =0;
+            	if(oDiv.offsetLeft>iTarget){
+            		speed = -setSpeed;
+            	}else{
+            		speed = setSpeed;
+            	}
+            	if(oDiv.offsetLeft===iTarget){
+            		clearInterval(timer);
+            	}else{
+            	oDiv.style.left = oDiv.offsetLeft+speed+'px';
+            }
+            },30);
+        }
+	</script>
+</head>
+<body>
+	<p>将鼠标移入“分享”块中</p>
+	<div id="animate">
+		<p>我出来了！</p>
+		<span id="share">分享</span>
+	</div>
+</body>
+</html>
